@@ -43,6 +43,7 @@ if ( !defined( 'BANNERTIME_POST_TYPE' ) ) {
 // Set up custom post and field types via static methods in abstract classes
 require_once plugin_dir_path( __FILE__ ) . 'setup/CreatePostType.php';
 require_once plugin_dir_path( __FILE__ ) . 'setup/AddFields.php';
+require_once plugin_dir_path( __FILE__ ) . 'setup/SaveFields.php';
 require_once plugin_dir_path( __FILE__ ) . 'setup/FieldType.php'; // Hook into WP routines to fire static methods
 
 // Hook into WP routines to fire static methods
@@ -54,8 +55,9 @@ if(is_admin()) {
 	add_action( 'admin_print_styles-post.php', [ 'BannerTime\AddFields', 'Style' ] );
 }
 
+add_action( 'save_post', [ 'SaveFields', 'save' ] );
 
-//add_action( 'save_post', [ 'AddFields', 'save' ] );
+
 
 /*
 //Check to see if cookie set and if plugin is set up

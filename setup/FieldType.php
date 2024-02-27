@@ -24,9 +24,10 @@ abstract class FieldType {
         
         if($value !== "") $value = 'checked';
 
-        echo '<label for="bannertime_' . $args['name'] . '">' . $args['desc'] . '</label>';
+        echo '<div class="bannertime-wrap">';
         echo '<input type="checkbox" name="bannertime_' . $args['name'] . '"';
         echo 'id="bannertime_' . $args['name'] . '" class="postbox" ' . $value . '>';
+        echo '<label for="bannertime_' . $args['name'] . '">' . $args['desc'] . '</label></div>';
 
     }
 

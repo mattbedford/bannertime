@@ -36,28 +36,6 @@ abstract class AddFields {
 
 
     /**
-     * Save the meta box selections.
-     *
-     * @param int $post_id  The post ID.
-     */
-    public static function save( int $post_id ): void
-    {
-        if ( array_key_exists( 'wporg_field', $_POST ) ) {
-            update_post_meta(
-                $post_id,
-                '_wporg_meta_key',
-                $_POST['wporg_field']
-            );
-        }
-    }
-
-
-
-
-
-
-
-    /**
      * Display the meta box HTML to the user.
      *
      * @param WP_Post $post   Post object. 
