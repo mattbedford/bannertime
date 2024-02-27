@@ -19,7 +19,7 @@ abstract class AddFields {
               BANNERTIME_POST_TYPE,
               'normal',
               'low',
-               $fields = self::ReturnDisplayFields(),
+               $fields = self::ReturnFields("DisplayFieldDefs.php"),
              );
 
 
@@ -29,7 +29,7 @@ abstract class AddFields {
                 BANNERTIME_POST_TYPE,
                 'normal',
                 'low',
-                 $fields = self::ReturnControlFields(),
+                 $fields = self::ReturnFields("ControlFieldDefs.php"),
                );
 
     }
@@ -50,6 +50,7 @@ abstract class AddFields {
             );
         }
     }
+
 
 
 
@@ -98,25 +99,29 @@ abstract class AddFields {
      *
      * @return array
      */
-    public static function ReturnDisplayFields(): Array 
+    public static function ReturnFields(string $file): Array 
     {
-        return [
-            ['name' =>'simple_mode', 'type' => 'checkbox', 'desc' => 'Simple mode will only show the banner message and a close button.'],
-            ['name' =>'title', 'type' => 'text', 'desc' => 'The title of the banner.'],
-            ['name' =>'subtitle', 'type' => 'text', 'desc' => 'The subtitle of the banner.'],
-            ['name' =>'banner_message', 'type' => 'text', 'desc' => 'The message of the banner.'],
-            ['name' =>'link', 'type' => 'text', 'desc' => 'The link of the banner.'],
-            ['name' =>'link_text', 'type' => 'text', 'desc' => 'The link text of the banner.'],
-        ];
+        
+        $res = require_once plugin_dir_path(__FILE__) . $file;
+        return $res;
+
     }
 
-    public static function ReturnControlFields(): Array 
+
+
+    public static function Style(): void
     {
-        return [
-            ['name' =>'display_pages', 'type' => 'text', 'desc' => 'List here the post IDs or slugs of where this banner should show'],
-            ['name' =>'exclude_pages', 'type' => 'text', 'desc' => 'List any post IDs or slugs of where banner should not be displayed'],
-        ];
+        global $typenow;
+
+        echo "<script>console.log('adding style. typenow is " . ucfirst($typenow) . "');</script>";
+        echo "<script>console.log('adding style. bannertime_post_type is " . BANNERTIME_POST_TYPE . "');</script>";
+
+        if( BANNERTIME_POST_TYPE === ucfirst($typenow) ) {
+            wp_register_style( 'bannertime-styles',  plugins_url( 'assets/styles.css' , dirname(__FILE__) ));
+            wp_enqueue_style('bannertime-styles');
+        }
     }
+
 
 }
 

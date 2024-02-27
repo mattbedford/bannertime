@@ -1,0 +1,5 @@
+#bannertime_display .inside {
+	display:flex;
+    flex-direction:column;
+    background: pink !important;
+}
