@@ -55,7 +55,7 @@ if(is_admin()) {
 	add_action( 'admin_print_styles-post.php', [ 'BannerTime\AddFields', 'Style' ] );
 }
 
-add_action( 'save_post', [ 'SaveFields', 'save' ] );
+//add_action( 'save_post', [ 'SaveFields', 'save' ] );
 
 
 
