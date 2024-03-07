@@ -42,21 +42,16 @@ if ( !defined( 'BANNERTIME_POST_TYPE' ) ) {
 
 // Set up custom post and field types via static methods in abstract classes
 require_once plugin_dir_path( __FILE__ ) . 'setup/CreatePostType.php';
-require_once plugin_dir_path( __FILE__ ) . 'setup/AddFields.php';
-require_once plugin_dir_path( __FILE__ ) . 'setup/SaveFields.php';
 require_once plugin_dir_path( __FILE__ ) . 'setup/AdminMenu.php';
-require_once plugin_dir_path( __FILE__ ) . 'setup/FieldType.php'; // Hook into WP routines to fire static methods
 
 // Hook into WP routines to fire static methods
 add_action( 'wp_loaded', [ 'BannerTime\CreatePostType', 'PostType' ] );
-add_action( 'add_meta_boxes', [ 'BannerTime\AddFields', 'Add' ] );
 
 if(is_admin()) {
-	add_action( 'admin_print_styles-post-new.php', [ 'BannerTime\AddFields', 'Style' ] );
-	add_action( 'admin_print_styles-post.php', [ 'BannerTime\AddFields', 'Style' ] );
 	add_action( 'admin_menu', [ 'BannerTime\AdminMenu', 'AddMenu' ] );
 }
 
+// TO DO: Build new class to handle saving fields
 //add_action( 'save_post', [ 'SaveFields', 'save' ] );
 
 
