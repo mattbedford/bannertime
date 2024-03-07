@@ -44,6 +44,7 @@ if ( !defined( 'BANNERTIME_POST_TYPE' ) ) {
 require_once plugin_dir_path( __FILE__ ) . 'setup/CreatePostType.php';
 require_once plugin_dir_path( __FILE__ ) . 'setup/AddFields.php';
 require_once plugin_dir_path( __FILE__ ) . 'setup/SaveFields.php';
+require_once plugin_dir_path( __FILE__ ) . 'setup/AdminMenu.php';
 require_once plugin_dir_path( __FILE__ ) . 'setup/FieldType.php'; // Hook into WP routines to fire static methods
 
 // Hook into WP routines to fire static methods
@@ -53,6 +54,7 @@ add_action( 'add_meta_boxes', [ 'BannerTime\AddFields', 'Add' ] );
 if(is_admin()) {
 	add_action( 'admin_print_styles-post-new.php', [ 'BannerTime\AddFields', 'Style' ] );
 	add_action( 'admin_print_styles-post.php', [ 'BannerTime\AddFields', 'Style' ] );
+	add_action( 'admin_menu', [ 'BannerTime\AdminMenu', 'AddMenu' ] );
 }
 
 //add_action( 'save_post', [ 'SaveFields', 'save' ] );
