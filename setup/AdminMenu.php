@@ -22,6 +22,28 @@ class AdminMenu {
     public static function MenuHtml(): void
     {
         echo "<h1>Banner Time</h1>";
+
+        $args = array(
+            'post_type' => BANNERTIME_POST_TYPE,
+            'post_status' => 'publish',
+            'posts_per_page' => -1,
+            'orderby' => 'date',
+            'order' => 'DESC'
+        );
+
+        $banners = new \WP_Query($args);
+
+        if($banners->have_posts()) {
+            echo "<h2>Banners</h2>";
+            echo "<ul>";
+            while($banners->have_posts()) {
+                $banners->the_post();
+                echo "<li><a href='" . get_edit_post_link() . "'>" . get_the_title() . "</a></li>";
+            }
+            echo "</ul>";
+        } else {
+            echo "<p>No banners found</p>";
+        }
     }
 
 }
